@@ -11,6 +11,8 @@ class GameViewModel(private val gamePlay: GamePlay) : ViewModel() {
 
     private var gameObjects: List<GameObject> = arrayListOf()
 
+    private var playerSelected: Boolean = false
+
     var gameItemsPlayerA: List<GameItems> = arrayListOf()
     var gameItemsPlayerB: List<GameItems> = arrayListOf()
 
@@ -21,11 +23,11 @@ class GameViewModel(private val gamePlay: GamePlay) : ViewModel() {
     fun initializeGame(gameType: GameType) {
         gamePlay.initializeGame(gameType, object : ResultCallback {
             override fun onProgress(progress: Long) {
-                onProgress(progress)
+                onProgressLoader(progress)
             }
 
             override fun onResult(result: Result) {
-                onResult(result)
+                onResultFinal(result)
             }
 
         })
@@ -35,6 +37,8 @@ class GameViewModel(private val gamePlay: GamePlay) : ViewModel() {
         gameItemsPlayerA = populateGameObjects()
         gameItemsPlayerB = populateGameObjects()
     }
+
+    fun getPlayerSelected() = playerSelected
 
     private fun populateGameObjects(): List<GameItems> {
         val gameItems: MutableList<GameItems> = arrayListOf()
@@ -53,6 +57,12 @@ class GameViewModel(private val gamePlay: GamePlay) : ViewModel() {
         gameObject?.let {
             gamePlay.assignPlayerSelection(gameObject)
         }
+
+        gameItemsPlayerB.map {
+            it.selected = gameItems.item == it.item
+        }
+
+        playerSelected = true
     }
 
     fun startGame(){
@@ -60,6 +70,9 @@ class GameViewModel(private val gamePlay: GamePlay) : ViewModel() {
     }
 
     fun resetGame(){
+
+        playerSelected = false
+
         gameItemsPlayerA.map {
             it.selected = false
         }
@@ -69,11 +82,11 @@ class GameViewModel(private val gamePlay: GamePlay) : ViewModel() {
         }
     }
 
-    private fun onProgress(onProgress: Long) {
-        progressLiveData.postValue(onProgress)
+    private fun onProgressLoader(onProgress: Long) {
+        progressLiveData.value = onProgress
     }
 
-    private fun onResult(result: Result) {
+    private fun onResultFinal(result: Result) {
        gameItemsPlayerA.map {
            it.selected = it.item == result.playerAObject.item
         }

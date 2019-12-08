@@ -1,11 +1,13 @@
 package com.vicky.apps.rockpaperscissor.ui.view
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Adapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.vicky.apps.gamecore.GameState
 import com.vicky.apps.gamecore.GameType
 import com.vicky.apps.rockpaperscissor.R
 import com.vicky.apps.rockpaperscissor.base.AppConstants
@@ -25,6 +27,10 @@ class GameActivity : BaseActivity() {
 
     private lateinit var viewModel: GameViewModel
 
+    private var gamePlayed: Boolean = false
+
+    private var gameType: GameType? = null
+
     private lateinit var playerAdapterA : DataAdapter
 
     private lateinit var playerAdapterB : DataAdapter
@@ -42,11 +48,48 @@ class GameActivity : BaseActivity() {
         setContentView(R.layout.activity_game)
         initializeViewModel()
         initializeRecyclers()
-
+        initializeButton()
         val gameType:GameType = intent?.
             getSerializableExtra(AppConstants.GAME_TYPE_INTENT) as GameType
 
-        initializeGame(gameType)
+        gameType?.let {
+            this.gameType = it
+            initializeGame(gameType)
+
+        }
+
+        resetGame()
+    }
+
+    private fun initializeButton() {
+        playButton.setOnClickListener {
+            playButtonClicked()
+        }
+
+        changeModeButton.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun enableDisableButton(boolean: Boolean){
+        playButton.isEnabled = boolean
+        changeModeButton.isEnabled = boolean
+    }
+
+    private fun playButtonClicked() {
+
+        if(gamePlayed){
+            resetGame()
+            gamePlayed = false
+        }
+        if(gameType == GameType.PLAYER_VS_COMPUTER){
+            if(viewModel.getPlayerSelected()){
+                startPlay()
+            }
+        }else {
+            startPlay()
+        }
+
     }
 
     private fun initializeRecyclers() {
@@ -67,7 +110,7 @@ class GameActivity : BaseActivity() {
     }
 
     private fun clickInPlayerB(gameItems: GameItems, i: Int) {
-        viewModel.gameItemsPlayerB[i].selected = true
+        viewModel.playerSelection(gameItems)
         playerAdapterB.updateData(viewModel.gameItemsPlayerB)
     }
 
@@ -77,6 +120,14 @@ class GameActivity : BaseActivity() {
 
     private fun initializeGame(gameType: GameType) {
         viewModel.initializeGame(gameType)
+        updateAdapter()
+        updatePlayerText(gameType)
+
+    }
+
+
+
+    private fun updateAdapter(){
         playerAdapterA.updateData(viewModel.gameItemsPlayerA)
         playerAdapterB.updateData(viewModel.gameItemsPlayerB)
     }
@@ -93,12 +144,64 @@ class GameActivity : BaseActivity() {
         })
     }
 
-    private fun onProgress(it: Long?) {
-
+    private fun startPlay(){
+        enableDisableButton(false)
+        viewModel.startGame()
     }
 
-    private fun onResult(resultUI: ResultUI?) {
+    private fun onProgress(it: Long?) {
+        resultText.text = it.toString()
+    }
 
+    private fun onResult(result: ResultUI?) {
+        when(result?.gameState){
+            GameState.PLAYER_A_WON -> playerAWon()
+            GameState.PLAYER_B_WON -> playerBWon()
+            GameState.DRAW -> draw()
+        }
+
+        enableDisableButton(true)
+        gamePlayed = true
+    }
+
+    private fun resetGame(){
+        if(gameType == GameType.PLAYER_VS_COMPUTER){
+            resultText.text = getString(R.string.choose_your_move)
+        }else {
+            resultText.text = getString(R.string.click_play)
+        }
+        viewModel.resetGame()
+        updateAdapter()
+    }
+
+    private fun draw() {
+        resultText.text = getString(R.string.draw)
+    }
+
+    private fun playerBWon() {
+        if(gameType == GameType.PLAYER_VS_COMPUTER){
+            resultText.text = getString(R.string.you_won)
+        }else {
+            resultText.text = getString(R.string.computer_b_won)
+        }
+    }
+
+    private fun playerAWon() {
+        if(gameType == GameType.PLAYER_VS_COMPUTER){
+            resultText.text = getString(R.string.you_lose)
+        }else {
+            resultText.text = getString(R.string.computer_a_won)
+        }
+    }
+
+    private fun updatePlayerText(gameType: GameType) {
+        if(gameType == GameType.PLAYER_VS_COMPUTER){
+            playerAText.text = getString(R.string.computer)
+            playerBText.text = getString(R.string.player)
+        }else if (gameType == GameType.COMPUTER_VS_COMPUTER){
+            playerAText.text = getString(R.string.computer)
+            playerBText.text = getString(R.string.computer)
+        }
     }
 
 

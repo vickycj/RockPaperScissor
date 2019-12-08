@@ -17,6 +17,7 @@ import com.vicky.apps.rockpaperscissor.common.ViewModelProviderFactory
 import com.vicky.apps.rockpaperscissor.ui.adapter.DataAdapter
 
 import com.vicky.apps.rockpaperscissor.ui.viewmodel.MainViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 
@@ -37,8 +38,16 @@ class MainActivity : BaseActivity() {
 
 
         val intent = Intent(this,GameActivity::class.java)
-        intent.putExtra(AppConstants.GAME_TYPE_INTENT,GameType.PLAYER_VS_COMPUTER)
-        startActivity(intent)
+
+        playerVsComputer.setOnClickListener {
+            intent.putExtra(AppConstants.GAME_TYPE_INTENT,GameType.PLAYER_VS_COMPUTER)
+            startActivity(intent)
+        }
+
+        computerVsComputer.setOnClickListener {
+            intent.putExtra(AppConstants.GAME_TYPE_INTENT,GameType.COMPUTER_VS_COMPUTER)
+            startActivity(intent)
+        }
     }
 
 

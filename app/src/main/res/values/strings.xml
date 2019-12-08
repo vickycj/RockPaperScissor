@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Rock/Paper/Scissor</string>
+    <string name="computer">Computer</string>
+    <string name="player">Player</string>
+    <string name="you_lose">You Lose</string>
+    <string name="you_won">You Won</string>
+    <string name="computer_a_won">Comp A Won</string>
+    <string name="computer_b_won">Comp B Won</string>
+    <string name="draw">Draw</string>
+    <string name="play">play</string>
+    <string name="change_mode">Change Mode</string>
+    <string name="choose_your_move">Choose your move</string>
+    <string name="click_play">Click Play</string>
+    <string name="player_vs_computer">Player vs Computer</string>
+    <string name="game_mode">Game Mode</string>
 </resources>

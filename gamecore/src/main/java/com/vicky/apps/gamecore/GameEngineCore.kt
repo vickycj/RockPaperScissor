@@ -3,6 +3,7 @@ package com.vicky.apps.gamecore
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
@@ -49,10 +50,12 @@ class GameEngineCore(private val counterTime: Long = GameConstants.COUNTER_3_SEC
     }
 
     private fun initTimer() {
-       val disposeTimer =  Observable.interval(counterTime, TimeUnit.SECONDS)
+        val disposeTimer =  Observable.interval(0,1, TimeUnit.SECONDS)
+           .take(counterTime+1)
+           .subscribeOn(Schedulers.io())
            .observeOn(AndroidSchedulers.mainThread())
            .subscribe {
-               resultCallback.onProgress(it)
+               resultCallback.onProgress(counterTime - it)
                if(it == counterTime){
                    assignValues()
                    emitResults()
