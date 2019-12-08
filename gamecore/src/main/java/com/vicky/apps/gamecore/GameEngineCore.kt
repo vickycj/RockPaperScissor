@@ -46,10 +46,11 @@ class GameEngineCore(private val counterTime: Long = GameConstants.COUNTER_3_SEC
 
     private fun emitResults(){
        resultCallback.onResult(generateResult(playerA,playerB))
-       compositeDisposable.dispose()
     }
 
     private fun initTimer() {
+
+
         val disposeTimer =  Observable.interval(0,1, TimeUnit.SECONDS)
            .take(counterTime+1)
            .subscribeOn(Schedulers.io())
@@ -61,8 +62,6 @@ class GameEngineCore(private val counterTime: Long = GameConstants.COUNTER_3_SEC
                    emitResults()
                }
            }
-
-        compositeDisposable.add(disposeTimer)
 
     }
 

@@ -77,11 +77,12 @@ class GameActivity : BaseActivity() {
     }
 
     private fun playButtonClicked() {
-
         if(gamePlayed){
             resetGame()
             gamePlayed = false
+            return
         }
+
         if(gameType == GameType.PLAYER_VS_COMPUTER){
             if(viewModel.getPlayerSelected()){
                 startPlay()
