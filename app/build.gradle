@@ -23,13 +23,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    
-     packagingOptions {
+
+    packagingOptions {
         exclude 'META-INF/atomicfu.kotlin_module'
     }
 }
-
-
 
 
 kapt {

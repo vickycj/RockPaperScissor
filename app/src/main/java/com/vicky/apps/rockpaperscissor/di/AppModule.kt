@@ -5,6 +5,8 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import com.vicky.apps.gamecore.GameEngineCore
+import com.vicky.apps.gamecore.GamePlay
 import com.vicky.apps.rockpaperscissor.base.NetworkConstant
 import com.vicky.apps.rockpaperscissor.common.SchedulerProvider
 import com.vicky.apps.rockpaperscissor.data.remote.ApiService
@@ -74,6 +76,12 @@ class AppModule {
     @Singleton
     fun provideRepository(apiService: ApiService): Repository{
         return Repository(apiService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGameEngine(): GamePlay {
+        return GameEngineCore()
     }
 
 }

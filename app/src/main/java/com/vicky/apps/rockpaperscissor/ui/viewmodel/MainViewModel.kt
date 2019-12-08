@@ -10,9 +10,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 
 
-class MainViewModel(private val repository: Repository,
-                    private val schedulerProvider: SchedulerProvider
-):ViewModel() {
+class MainViewModel():ViewModel() {
 
 
 
