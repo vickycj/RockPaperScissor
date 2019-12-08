@@ -1,9 +1,9 @@
-package com.vicky.apps.datapoints.common
+package com.vicky.apps.rockpaperscissor.common
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.vicky.apps.datapoints.data.remote.Repository
-import com.vicky.apps.datapoints.ui.viewmodel.MainViewModel
+import com.vicky.apps.rockpaperscissor.data.remote.Repository
+import com.vicky.apps.rockpaperscissor.ui.viewmodel.MainViewModel
 import javax.inject.Inject
 
 

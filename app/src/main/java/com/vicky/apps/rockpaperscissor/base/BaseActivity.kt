@@ -1,4 +1,4 @@
-package com.vicky.apps.datapoints.base
+package com.vicky.apps.rockpaperscissor.base
 
 import android.app.Fragment
 import androidx.appcompat.app.AppCompatActivity

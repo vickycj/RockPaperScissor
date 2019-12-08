@@ -1,4 +1,4 @@
-package com.vicky.apps.datapoints.base
+package com.vicky.apps.rockpaperscissor.base
 
 object NetworkConstant {
 

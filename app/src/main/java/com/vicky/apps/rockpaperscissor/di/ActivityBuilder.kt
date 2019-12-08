@@ -1,6 +1,6 @@
-package com.vicky.apps.datapoints.di
+package com.vicky.apps.rockpaperscissor.di
 
-import com.vicky.apps.datapoints.ui.view.MainActivity
+import com.vicky.apps.rockpaperscissor.ui.view.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

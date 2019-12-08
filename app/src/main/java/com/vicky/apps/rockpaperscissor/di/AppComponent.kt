@@ -1,7 +1,7 @@
-package com.vicky.apps.datapoints.di
+package com.vicky.apps.rockpaperscissor.di
 
 import android.app.Application
-import com.vicky.apps.datapoints.base.BaseApplication
+import com.vicky.apps.rockpaperscissor.base.BaseApplication
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule

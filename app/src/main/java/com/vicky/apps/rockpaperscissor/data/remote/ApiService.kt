@@ -1,4 +1,4 @@
-package com.vicky.apps.datapoints.data.remote
+package com.vicky.apps.rockpaperscissor.data.remote
 
 
 import io.reactivex.Single

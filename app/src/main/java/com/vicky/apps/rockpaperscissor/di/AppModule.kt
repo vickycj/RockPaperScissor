@@ -1,14 +1,14 @@
-package com.vicky.apps.datapoints.di
+package com.vicky.apps.rockpaperscissor.di
 
 import android.app.Application
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import com.vicky.apps.datapoints.base.NetworkConstant
-import com.vicky.apps.datapoints.common.SchedulerProvider
-import com.vicky.apps.datapoints.data.remote.ApiService
-import com.vicky.apps.datapoints.data.remote.Repository
+import com.vicky.apps.rockpaperscissor.base.NetworkConstant
+import com.vicky.apps.rockpaperscissor.common.SchedulerProvider
+import com.vicky.apps.rockpaperscissor.data.remote.ApiService
+import com.vicky.apps.rockpaperscissor.data.remote.Repository
 import dagger.Module
 import dagger.Provides
 import io.reactivex.android.schedulers.AndroidSchedulers

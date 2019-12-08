@@ -1,8 +1,8 @@
-package com.vicky.apps.datapoints.base
+package com.vicky.apps.rockpaperscissor.base
 
 import android.app.Activity
 import android.app.Application
-import com.vicky.apps.datapoints.di.DaggerAppComponent
+import com.vicky.apps.rockpaperscissor.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector

@@ -1,4 +1,4 @@
-package com.vicky.apps.datapoints.common
+package com.vicky.apps.rockpaperscissor.common
 
 import io.reactivex.*
 

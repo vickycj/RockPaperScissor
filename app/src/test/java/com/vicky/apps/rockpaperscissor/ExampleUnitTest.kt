@@ -1,4 +1,4 @@
-package com.vicky.apps.datapoints
+package com.vicky.apps.rockpaperscissor
 
 import org.junit.Test
 

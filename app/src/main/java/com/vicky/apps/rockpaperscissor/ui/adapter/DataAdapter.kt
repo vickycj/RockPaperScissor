@@ -1,11 +1,11 @@
-package com.vicky.apps.datapoints.ui.adapter
+package com.vicky.apps.rockpaperscissor.ui.adapter
 
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.vicky.apps.datapoints.R
+import com.vicky.apps.rockpaperscissor.R
 
 
 class DataAdapter constructor() : RecyclerView.Adapter<DataAdapter.DataViewHolder>() {

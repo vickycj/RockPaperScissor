@@ -1,10 +1,10 @@
-package com.vicky.apps.datapoints.ui.viewmodel
+package com.vicky.apps.rockpaperscissor.ui.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.vicky.apps.datapoints.common.SchedulerProvider
-import com.vicky.apps.datapoints.data.remote.Repository
+import com.vicky.apps.rockpaperscissor.common.SchedulerProvider
+import com.vicky.apps.rockpaperscissor.data.remote.Repository
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
