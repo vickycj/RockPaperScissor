@@ -1,3 +1,3 @@
 package com.vicky.apps.gamecore
 
-data class Result(val player: Player,val gameObject: GameObject)
+data class Result(val state:GameState ,val playerAObject: GameObject, val playerBObject: GameObject)

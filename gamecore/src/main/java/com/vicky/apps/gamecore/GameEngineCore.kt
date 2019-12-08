@@ -74,11 +74,12 @@ class GameEngineCore(private val counterTime: Long = GameConstants.COUNTER_3_SEC
     }
 
     private fun generateResult(playerA:Player, playerB: Player):Result{
-        Log.d("Player A" , playerA.gameObject.item)
-        Log.d("Player B" , playerB.gameObject.item)
-        return when(playerA.gameObject.attacks.contains(playerB.gameObject)){
-            true -> Result(playerA, playerA.gameObject)
-            false -> Result(playerB,playerB.gameObject)
+        if (playerA.gameObject.attacks.contains(playerB.gameObject)) {
+            return Result(GameState.PLAYER_A_WON, playerA.gameObject, playerB.gameObject)
+        } else if (playerA.gameObject.defends.contains(playerB.gameObject)) {
+            return Result(GameState.PLAYER_B_WON, playerA.gameObject, playerB.gameObject)
+        } else {
+            return Result(GameState.DRAW, playerA.gameObject, playerB.gameObject)
         }
     }
 

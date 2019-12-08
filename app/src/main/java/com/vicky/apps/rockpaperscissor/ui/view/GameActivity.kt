@@ -2,7 +2,9 @@ package com.vicky.apps.rockpaperscissor.ui.view
 
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
+import com.vicky.apps.gamecore.GameType
 import com.vicky.apps.rockpaperscissor.R
+import com.vicky.apps.rockpaperscissor.base.AppConstants
 import com.vicky.apps.rockpaperscissor.base.BaseActivity
 import com.vicky.apps.rockpaperscissor.common.ViewModelProviderFactory
 import com.vicky.apps.rockpaperscissor.ui.viewmodel.GameViewModel
@@ -19,6 +21,15 @@ class GameActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
         initializeViewModel()
+
+        val gameType:GameType = intent?.
+            getSerializableExtra(AppConstants.GAME_TYPE_INTENT) as GameType
+
+        initializeGame(gameType)
+    }
+
+    private fun initializeGame(gameType: GameType) {
+        viewModel.initializeGame(gameType)
     }
 
     private fun initializeViewModel() {
