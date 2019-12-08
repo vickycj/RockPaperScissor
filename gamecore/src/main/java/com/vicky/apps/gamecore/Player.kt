@@ -1,6 +1,6 @@
 package com.vicky.apps.gamecore
 
-class Player(type:String){
+class Player(var type:String){
 
     lateinit var gameObject: GameObject
 

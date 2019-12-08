@@ -1,10 +1,15 @@
 package com.vicky.apps.rockpaperscissor.ui.view
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.vicky.apps.gamecore.GameEngineCore
+import com.vicky.apps.gamecore.GameType
+import com.vicky.apps.gamecore.Result
+import com.vicky.apps.gamecore.ResultCallback
 import com.vicky.apps.rockpaperscissor.base.BaseActivity
 import com.vicky.apps.rockpaperscissor.common.ViewModelProviderFactory
 import com.vicky.apps.rockpaperscissor.ui.adapter.DataAdapter
@@ -50,34 +55,9 @@ class MainActivity : BaseActivity() {
 
         viewModel.setCompositeData(compositeDisposable)
 
-        viewModel.getSubscription().observe(this, Observer {
-            if(it){
-                successCallback()
-            }else{
-                failureCallback()
-            }
-        })
-
-
-
-       // viewModel.getDataFromRemote()
-    }
-
-    private fun sortAndUpdateData() {
-        updateData()
-    }
-    private fun successCallback(){
-        updateData()
-    }
-
-    private fun updateData(){
-        adapter.updateData()
     }
 
 
-    private fun failureCallback(){
-        Toast.makeText(this,"API failed",Toast.LENGTH_LONG).show()
-    }
 
 
 

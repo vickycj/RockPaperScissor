@@ -1,5 +1,6 @@
 package com.vicky.apps.gamecore
 
+import android.util.Log
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -11,9 +12,7 @@ class GameEngineCore(private val counterTime: Long = GameConstants.COUNTER_3_SEC
 
     private lateinit var gameType:GameType
 
-    private var timer:Observable<Long>? = null
-
-    private lateinit var result: Observable<Result>
+    private lateinit var resultCallback: ResultCallback
 
     private lateinit var playerA: Player
 
@@ -21,15 +20,18 @@ class GameEngineCore(private val counterTime: Long = GameConstants.COUNTER_3_SEC
 
     private lateinit var gameObjects:List<GameObject>
 
-    override fun initializeGame(gameType: GameType) {
+    private val compositeDisposable = CompositeDisposable()
+
+
+    override fun initializeGame(gameType: GameType, resultCallback: ResultCallback) {
         this.gameType = gameType
+        this.resultCallback = resultCallback
         initializePlayer()
         gameObjects = initializeGameObjects()
     }
 
-    override fun timerSubscription(): Observable<Long>? = timer
-    override fun resultSubscription(): Observable<Result> = result
     override fun getListOfGameObjects(): List<GameObject> = gameObjects
+
     override fun assignPlayerSelection(gameObject: GameObject) {
         if(gameType == GameType.PLAYER_VS_COMPUTER)
             playerB.gameObject = gameObject
@@ -39,20 +41,27 @@ class GameEngineCore(private val counterTime: Long = GameConstants.COUNTER_3_SEC
 
     override fun startResult() {
         initTimer()
+
     }
 
     private fun emitResults(){
-        result = Observable.just(generateResult(playerA,playerB))
-            .observeOn(AndroidSchedulers.mainThread())
+       resultCallback.onResult(generateResult(playerA,playerB))
+       compositeDisposable.dispose()
     }
 
     private fun initTimer() {
-       timer =  Observable.interval(counterTime, TimeUnit.SECONDS)
+       val disposeTimer =  Observable.interval(counterTime, TimeUnit.SECONDS)
            .observeOn(AndroidSchedulers.mainThread())
-           .doOnComplete {
-               assignValues()
-               emitResults()
+           .subscribe {
+               resultCallback.onProgress(it)
+               if(it == counterTime){
+                   assignValues()
+                   emitResults()
+               }
            }
+
+        compositeDisposable.add(disposeTimer)
+
     }
 
     private fun assignValues() {
@@ -65,6 +74,8 @@ class GameEngineCore(private val counterTime: Long = GameConstants.COUNTER_3_SEC
     }
 
     private fun generateResult(playerA:Player, playerB: Player):Result{
+        Log.d("Player A" , playerA.gameObject.item)
+        Log.d("Player B" , playerB.gameObject.item)
         return when(playerA.gameObject.attacks.contains(playerB.gameObject)){
             true -> Result(playerA, playerA.gameObject)
             false -> Result(playerB,playerB.gameObject)

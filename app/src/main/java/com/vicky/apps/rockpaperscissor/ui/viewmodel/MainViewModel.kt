@@ -24,29 +24,13 @@ class MainViewModel(private val repository: Repository,
     private lateinit var compositeDisposable: CompositeDisposable
 
 
-
-    private var ascendingVal:Boolean = false
-
     fun setCompositeData(compositeDisposable: CompositeDisposable) {
         this.compositeDisposable = compositeDisposable
     }
 
 
 
-    fun getDataFromRemote() {
 
-        compositeDisposable.add(generateApiCall().subscribeBy ( onSuccess = {
-            response.postValue(true)
-        }, onError = {
-            Log.d("valuessss",it.message)
-        } ))
-
-
-    }
-    fun generateApiCall():Single<List<Any>>{
-        return repository.getDataFromApi()
-            .compose(schedulerProvider.getSchedulersForSingle())
-    }
 
 
 

@@ -1,6 +1,6 @@
 package com.vicky.apps.gamecore
 
-class GameObject (item:String){
+class GameObject (val item:String){
     var attacks:List<GameObject> = arrayListOf()
     var defends:List<GameObject> = arrayListOf()
 }
