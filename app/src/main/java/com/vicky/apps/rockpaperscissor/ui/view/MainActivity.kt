@@ -1,4 +1,5 @@
 package com.vicky.apps.rockpaperscissor.ui.view
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -10,6 +11,7 @@ import com.vicky.apps.gamecore.GameEngineCore
 import com.vicky.apps.gamecore.GameType
 import com.vicky.apps.gamecore.Result
 import com.vicky.apps.gamecore.ResultCallback
+import com.vicky.apps.rockpaperscissor.base.AppConstants
 import com.vicky.apps.rockpaperscissor.base.BaseActivity
 import com.vicky.apps.rockpaperscissor.common.ViewModelProviderFactory
 import com.vicky.apps.rockpaperscissor.ui.adapter.DataAdapter
@@ -33,6 +35,10 @@ class MainActivity : BaseActivity() {
         setContentView(com.vicky.apps.rockpaperscissor.R.layout.activity_main)
         initializeValues()
 
+
+        val intent = Intent(this,GameActivity::class.java)
+        intent.putExtra(AppConstants.GAME_TYPE_INTENT,GameType.PLAYER_VS_COMPUTER)
+        startActivity(intent)
     }
 
 

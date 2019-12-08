@@ -7,7 +7,7 @@ import com.vicky.apps.rockpaperscissor.ui.model.GameItems
 import com.vicky.apps.rockpaperscissor.ui.model.ResultUI
 
 
-class GameViewModel(val gamePlay: GamePlay) : ViewModel() {
+class GameViewModel(private val gamePlay: GamePlay) : ViewModel() {
 
     private var gameObjects: List<GameObject> = arrayListOf()
 
@@ -53,6 +53,10 @@ class GameViewModel(val gamePlay: GamePlay) : ViewModel() {
         gameObject?.let {
             gamePlay.assignPlayerSelection(gameObject)
         }
+    }
+
+    fun startGame(){
+        gamePlay.startResult()
     }
 
     fun resetGame(){
