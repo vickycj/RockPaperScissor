@@ -22,4 +22,13 @@ GameCore Module - Game core logic, exported the app module with abstraction
 
 The application is divided into two modules. The application/Presentation layer is where the UI design is implemented,
 whereas the gamecore module is android library which contains the game core logic. This way we can abstract/extract the game logic
-and use it in other apps by adding it as dependancy.
+and use it in other apps by adding it as dependency.
+
+
+Screenshots
+--------------
+
+
+Solarized dark             |  Solarized Ocean
+:-------------------------:|:-------------------------:
+![](https://raw.githubusercontent.com/vickycj/RockPaperScissor/master/screenshot1.png)  |  ![](https://raw.githubusercontent.com/vickycj/RockPaperScissor/master/screenshot2.png)
