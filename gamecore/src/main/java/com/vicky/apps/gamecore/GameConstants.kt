@@ -9,6 +9,9 @@ class GameConstants {
         const val OBJECT_NAME_PAPER = "paper"
         const val OBJECT_NAME_SCISSOR = "scissor"
 
+        const val PLAYER_TYPE_HUMAN = "human"
+        const val PLAYER_TYPE_COMPUTER = "computer"
+
     }
 
 }
