@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/RockPaperScissor.iml" filepath="$PROJECT_DIR$/RockPaperScissor.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/RockPaperScissor-app.iml" filepath="$PROJECT_DIR$/app/RockPaperScissor-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gamecore/gamecore.iml" filepath="$PROJECT_DIR$/gamecore/gamecore.iml" />
     </modules>
   </component>
 </project>
