@@ -73,11 +73,19 @@ class GameViewModel(private val gamePlay: GamePlay) : ViewModel() {
 
         playerSelected = false
 
-        gameItemsPlayerA.map {
-            it.selected = false
-        }
+        resetList()
+    }
+
+    fun resetList(){
+        resetPlayerA()
 
         gameItemsPlayerB.map {
+            it.selected = false
+        }
+    }
+
+    fun resetPlayerA(){
+        gameItemsPlayerA.map {
             it.selected = false
         }
     }
@@ -96,6 +104,10 @@ class GameViewModel(private val gamePlay: GamePlay) : ViewModel() {
         }
 
         resultLiveData.postValue(ResultUI(result.state))
+    }
+
+    fun getRandomNumber(): Int{
+        return (gameObjects.indices).shuffled().first()
     }
 
 

@@ -5,6 +5,7 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import com.vicky.apps.gamecore.GameConstants
 import com.vicky.apps.gamecore.GameEngineCore
 import com.vicky.apps.gamecore.GamePlay
 import com.vicky.apps.rockpaperscissor.base.NetworkConstant
@@ -81,7 +82,7 @@ class AppModule {
     @Provides
     @Singleton
     fun provideGameEngine(): GamePlay {
-        return GameEngineCore()
+        return GameEngineCore(counterTime = GameConstants.COUNTER_5_SECONDS)
     }
 
 }

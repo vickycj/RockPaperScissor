@@ -111,8 +111,10 @@ class GameActivity : BaseActivity() {
     }
 
     private fun clickInPlayerB(gameItems: GameItems, i: Int) {
-        viewModel.playerSelection(gameItems)
-        playerAdapterB.updateData(viewModel.gameItemsPlayerB)
+        if(gameType == GameType.PLAYER_VS_COMPUTER){
+            viewModel.playerSelection(gameItems)
+            playerAdapterB.updateData(viewModel.gameItemsPlayerB)
+        }
     }
 
     private fun clickInPlayerA(gameItems: GameItems, i: Int) {
@@ -151,6 +153,18 @@ class GameActivity : BaseActivity() {
     }
 
     private fun onProgress(it: Long?) {
+
+        if(gameType == GameType.COMPUTER_VS_COMPUTER){
+            viewModel.resetList()
+            viewModel.gameItemsPlayerA[viewModel.getRandomNumber()].selected = true
+            viewModel.gameItemsPlayerB[viewModel.getRandomNumber()].selected = true
+            updateAdapter()
+        }else {
+            viewModel.resetPlayerA()
+            viewModel.gameItemsPlayerA[viewModel.getRandomNumber()].selected = true
+            playerAdapterA.updateData(viewModel.gameItemsPlayerA)
+        }
+
         resultText.text = it.toString()
     }
 

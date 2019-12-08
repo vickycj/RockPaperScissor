@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Rock/Paper/Scissor</string>
+    <string name="app_name">Rock Paper Scissor</string>
     <string name="computer">Computer</string>
     <string name="player">Player</string>
     <string name="you_lose">You Lose</string>
